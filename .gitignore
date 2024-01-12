@@ -1,0 +1,26 @@
+*
+# But not these files.
+!.*
+!.gitignore
+!.gitconfig
+!.ackrc
+!.zshrc
+!.gitignore_global
+!.gitattributes_global
+!.travis.yml
+!.vimrc
+!README.md
+# And those folders.
+!/Documents/
+!/Documents/Powershell Script/
+!/Documents/Powershell Script/**
+!/Documents/AutoHotKey Script/
+!/Documents/AutoHotKey Script/**
+!/Documents/*
+!/.prefs/
+!/.prefs/**
+!bash/
+!bash/**
+!.github/
+!.github/**
+.gitconfig
