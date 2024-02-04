@@ -6,6 +6,8 @@
 " text scroll if you mouse-click near the start or end of the window.
 set scrolloff=5
 
+" https://youtrack.jetbrains.com/issue/VIM-1377/Normal-mode-needs-to-be-more-obvious
+set showmodewidget colorfulmodewidget
 " Do incremental searching.
 set incsearch
 set hls
@@ -26,7 +28,10 @@ set highlightedyank
 
 set exchange
 
+let g:argtextobj_pairs="(:),{:},<:>"
 set argtextobj
+
+set textobj-entire
 
 set ReplaceWithRegister
 
@@ -47,34 +52,36 @@ set ideavimsupport+=singleline
 map Q gq
 
 set NERDTree
-" j, k          Store relative line number jumps in the jumplist.
-" nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
-" nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
+" j, k Store relative line number jumps in the jumplist.
+nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
 " set matchit
 packadd matchit
 
 let mapleader = " "
 
+imap jj <ESC>
 nmap # #N
 nmap * *N
 nmap zz zzze
+map U <C-R>
 nmap <leader><leader>l :noh<CR>
-"https://youtrack.jetbrains.com/issue/VIM-44/Unify-navigation-history-between-ideavim-and-idea
-nmap <C-o> <Esc><Action>(Back)
-nmap <C-i> <Esc><Action>(Forward)
+" https://youtrack.jetbrains.com/issue/VIM-44/Unify-navigation-history-between-ideavim-and-idea
+" nmap <C-o> <Esc><Action>(Back)
+" nmap <C-i> <Esc><Action>(Forward)
+" no longer needed
 
+nmap s <Plug>(easymotion-s2)
 nmap <leader>r <Action>(Run)
 nmap <leader>d <Action>(Debug)
 nmap <leader>c <Action>(Resume)
 nmap <leader>s <Action>(Stop)
-" nmap <leader>b <Action>(ToggleLineBreakpoint) "Alt B
 nmap <leader>m <Action>(XDebugger.MuteBreakpoints)
 nmap <leader>n :NERDTreeFocus<CR>
 
 map <leader>w [w
 map <leader>b [b
 map ci<leader>w [bv]ws
-
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
 "map \r <Action>(ReformatCode)
