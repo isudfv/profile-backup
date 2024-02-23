@@ -97,9 +97,12 @@ FocusWindowOnAnotherScreen() {
         if (x >= L && x < R && y >= T && y < B) {
             title := WinGetTitle(window)
             win_class := WinGetClass(window)
-            if (win_class == "Shell_TrayWnd") {
+            if (win_class == "Shell_TrayWnd" || 
+                win_class == "Shell_SecondaryTrayWnd"
+            ) {
                 continue
             }
+            ; MsgBox(title " " win_class " " window)
             WinActivate(window)
             break
         }
