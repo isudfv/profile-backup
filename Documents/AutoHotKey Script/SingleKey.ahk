@@ -102,3 +102,10 @@ AppsKey & F12:: {
 #Tab:: {
     FocusWindowOnAnotherScreen()
 }
+
+!WheelDown:: {
+    Send "{WheelRight}"
+}
+!WheelUp:: {
+    Send "{WheelLeft}"
+}

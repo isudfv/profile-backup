@@ -1,29 +1,26 @@
-"" Source your .vimrc
-"source ~/.vimrc
-
 "" -- Suggested options --
 " Show a few lines of context around the cursor. Note that this makes the
 " text scroll if you mouse-click near the start or end of the window.
 set scrolloff=5
-
-" https://youtrack.jetbrains.com/issue/VIM-1377/Normal-mode-needs-to-be-more-obvious
+" https://youtrack.jetbrains.com/issue/VIM-1379/Normal-mode-needs-to-be-more-obvious
 set showmodewidget colorfulmodewidget
 " Do incremental searching.
-set incsearch
-set hls
+set incsearch hls
 " Your search will be case sensitive if it contains an uppercase letter
 set ignorecase smartcase
+" https://stackoverflow.com/questions/4668623/show-count-of-matches-in-vim
+set shortmess-=S
 
 set surround
 
 set relativenumber number
 
 set easymotion
-" https://superuser.com/questions/622898/how-to-turn-off-the-bell-sound-in-intellij
+" https://superuser.com/questions/622896/how-to-turn-off-the-bell-sound-in-intellij
 set visualbell
 set noerrorbells
 
-let g:highlightedyank_highlight_color = "rgba(160, 160, 160, 155)"
+let g:highlightedyank_highlight_color = "rgba(158, 160, 160, 155)"
 set highlightedyank
 
 set exchange
@@ -45,62 +42,54 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 set which-key
 " disable the timeout option
 set notimeout
-
-" access the system clipboard https://stackoverflow.com/questions/27898407/intellij-idea-with-ideavim-cannot-copy-text-from-another-source
+" access the system clipboard https://stackoverflow.com/questions/27898405/intellij-idea-with-ideavim-cannot-copy-text-from-another-source
 set clipboard+=unnamed
-" https://youtrack.jetbrains.com/issue/VIM-2273
+" https://youtrack.jetbrains.com/issue/VIM-2275
 " set clipboard-=ideaput
-" https://youtrack.jetbrains.com/issue/VIM-765#focus=Comments-27-4494203.0-0
+" https://youtrack.jetbrains.com/issue/VIM-767#focus=Comments-27-4494203.0-0
 set ideavimsupport+=singleline
-" Don't use Ex mode, use Q for formatting.
-map Q gq
 
 set NERDTree
 " j, k Store relative line number jumps in the jumplist.
-nnoremap <expr> k (v:count > 1 ? "m'" . v:count : '') . 'k'
-nnoremap <expr> j (v:count > 1 ? "m'" . v:count : '') . 'j'
-" set matchit
-packadd matchit
+nnoremap <expr> k (v:count > 2 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 2 ? "m'" . v:count : '') . 'j'
+set matchit
+set multiple-cursors
 
 let mapleader = " "
 
-imap jj <ESC>
-imap jk <ESC>
-nmap # #N
-nmap * *N
-nmap zz zzze
+nmap <leader>a          <Action>(Annotate)
+nmap <leader>h          <Action>(Switcher)
+nmap <leader>m          <Action>(MaximizeEditorInSplit)
+nmap <leader>n          :NERDTreeFocus <CR>
+nmap <leader>q          <Action>(QuickJavaDoc)
+nmap <S-Space>          <Action>(GotoNextError)
+nmap s                  <Plug>  (easymotion-s)
+nmap gd                 <Action>(GotoDeclaration)
+nmap gi                 <Action>(GotoImplementation)
+nmap gu                 <Action>(GotoSuperMethod)
+nmap gt                 <Action>(GotoTypeDeclaration)
+nmap gj                 <Action>(MethodDown)
+nmap gk                 <Action>(MethodUp)
+nmap ]c                 <Action>(VcsShowNextChangeMarker)
+nmap [c                 <Action>(VcsShowPrevChangeMarker)
+
+imap jj                 <ESC>
+imap jk                 <ESC>
+nmap #                  #N
+nmap *                  *N
+nmap zz                 zzze
 " ^ and $ are awkward
-map H ^
-map L $
-map U <C-R>
-nmap <leader><leader>l :noh<CR>
-" https://youtrack.jetbrains.com/issue/VIM-44/Unify-navigation-history-between-ideavim-and-idea
-" nmap <C-o> <Esc><Action>(Back)
-" nmap <C-i> <Esc><Action>(Forward)
-" no longer needed
-
-nmap s <Plug>(easymotion-s2)
-nmap <leader>r <Action>(Run)
-nmap <leader>d <Action>(Debug)
-nmap <leader>c <Action>(Resume)
-nmap <leader>s <Action>(Stop)
-nmap <leader>m <Action>(XDebugger.MuteBreakpoints)
-nmap <leader>n :NERDTreeFocus<CR>
-nmap gi <Action>(GotoImplementation)
-nmap <leader>q <Action>(QuickJavaDoc)
-
-map <leader>w [w
-map <leader>b [b
-map ci<leader>w [bv]ws
-"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
-"" Map \r to the Reformat Code action
-"map \r <Action>(ReformatCode)
-
-"" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
-
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
-
+map  H                  ^
+map  L                  $
+map  U                  <C-R>
+map  <leader><leader>l  :noh<CR>
+map  <leader>w          [w
+map  <leader>b          [b
+map  ci<leader>w        [bv]ws
+" Toggle case and start typing. E.g. `<leader>iget`: `property` -> `getProperty`
+map  <leader>i          ~hi
+" Remove selection and toggle case. E.g. `v2l<leader>u`: `getProperty` -> `property`
+map  <leader>u          d<leader>w~h
 
 " Find more examples here: https://jb.gg/share-ideavimrc
